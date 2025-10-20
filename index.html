@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vercel Status Checker</title>
+  <title>Vercel System Status</title>
 
-  <!-- Font Awesome for icons -->
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -21,17 +21,35 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1><i class="fa-brands fa-vercel"></i> Vercel Status Monitor</h1>
-    <div id="status-card" class="status-card">
-      <i id="status-icon" class="fa-solid fa-circle-notch fa-spin"></i>
-      <h2 id="status-text">Checking current status...</h2>
-      <p id="status-description">Please wait while we fetch data from Vercel.</p>
-      <small id="last-updated"></small>
-    </div>
-  </div>
+  <header>
+    <h1><i class="fa-brands fa-vercel"></i> Vercel System Status</h1>
+    <p id="global-status">Loading current status...</p>
+  </header>
 
-  <!-- JavaScript -->
+  <main>
+    <section id="overall" class="card overall">
+      <h2><i id="status-icon" class="fa-solid fa-circle-notch fa-spin"></i> Overall System</h2>
+      <p id="status-description">Checking Vercel systems health...</p>
+      <small id="last-updated"></small>
+    </section>
+
+    <section id="components" class="components">
+      <h2><i class="fa-solid fa-layer-group"></i> Service Components</h2>
+      <div id="components-list" class="components-list">
+        <p>Loading component details...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      Powered by
+      <a href="https://vercel.com" target="_blank">Vercel</a> |
+      Data from <a href="https://www.vercel-status.com" target="_blank">Status API</a>
+    </p>
+  </footer>
+
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
