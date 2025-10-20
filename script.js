@@ -1,53 +1,92 @@
-const STATUS_URL = "https://www.vercel-status.com/api/v2/status.json";
-const card = document.getElementById("status-card");
+const API_STATUS = "https://www.vercel-status.com/api/v2/status.json";
+const API_COMPONENTS = "https://www.vercel-status.com/api/v2/components.json";
+
 const icon = document.getElementById("status-icon");
-const text = document.getElementById("status-text");
 const desc = document.getElementById("status-description");
 const updated = document.getElementById("last-updated");
+const globalStatus = document.getElementById("global-status");
+const componentsList = document.getElementById("components-list");
 
-async function checkVercelStatus() {
+async function fetchVercelStatus() {
   try {
-    const res = await fetch(STATUS_URL);
-    const data = await res.json();
-    const { status, indicator, description } = data;
+    const [statusRes, compRes] = await Promise.all([
+      fetch(API_STATUS),
+      fetch(API_COMPONENTS)
+    ]);
 
-    const now = new Date().toLocaleString();
+    const statusData = await statusRes.json();
+    const compsData = await compRes.json();
 
+    const { status, indicator, description } = statusData;
+
+    // Update global section
+    const now = new Date().toLocaleString('en-US', {
+       dateStyle: 'medium',
+       timeStyle: 'short'
+    });
     updated.textContent = `Last updated: ${now}`;
-    desc.textContent = description;
 
-    // Reset classes
-    card.classList.remove("ok", "warning", "critical");
+    desc.textContent = description;
+    globalStatus.textContent = `Overall Status: ${status.description}`;
+
+    document.querySelector(".overall").classList.remove("status-ok", "status-warning", "status-critical");
 
     switch (indicator) {
       case "none":
         icon.className = "fa-solid fa-circle-check";
-        card.classList.add("ok");
-        text.textContent = " All Systems Operational";
+        document.querySelector(".overall").classList.add("status-ok");
         break;
       case "minor":
       case "major":
         icon.className = "fa-solid fa-triangle-exclamation";
-        card.classList.add("warning");
-        text.textContent = " Partial Outage or Degraded Performance";
+        document.querySelector(".overall").classList.add("status-warning");
         break;
       case "critical":
         icon.className = "fa-solid fa-circle-xmark";
-        card.classList.add("critical");
-        text.textContent = " Major Outage Detected";
+        document.querySelector(".overall").classList.add("status-critical");
         break;
       default:
         icon.className = "fa-solid fa-circle-question";
-        text.textContent = "Unknown Status";
     }
+
+    // Render components
+    renderComponents(compsData.components);
   } catch (err) {
-    icon.className = "fa-solid fa-circle-xmark";
-    card.classList.add("critical");
-    text.textContent = "Error fetching status";
-    desc.textContent = "Failed to contact Vercel API.";
+    console.error("Error fetching Vercel status:", err);
+    globalStatus.textContent = "Error fetching Vercel status data.";
   }
 }
 
-// Run immediately and every 5 minutes
-checkVercelStatus();
-setInterval(checkVercelStatus, 300000);
+function renderComponents(components) {
+  componentsList.innerHTML = "";
+  components.forEach((comp) => {
+    const div = document.createElement("div");
+    div.classList.add("component");
+
+    let statusClass = "status-ok";
+    let iconType = "fa-circle-check";
+
+    if (comp.status === "operational") {
+      statusClass = "status-ok";
+      iconType = "fa-circle-check";
+    } else if (comp.status.includes("partial")) {
+      statusClass = "status-warning";
+      iconType = "fa-triangle-exclamation";
+    } else if (comp.status.includes("outage")) {
+      statusClass = "status-critical";
+      iconType = "fa-circle-xmark";
+    }
+
+    div.classList.add(statusClass);
+    div.innerHTML = `
+      <h3><i class="fa-solid ${iconType}"></i>${comp.name}</h3>
+      <p>Status: ${comp.status.replace(/_/g, " ")}</p>
+    `;
+
+    componentsList.appendChild(div);
+  });
+}
+
+// Initial fetch + auto refresh every 5 mins
+fetchVercelStatus();
+setInterval(fetchVercelStatus, 300000);
