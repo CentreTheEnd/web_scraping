@@ -887,39 +887,33 @@
     }
 
     function updateStatistics(components, incidents) {
-      // Calculate component status counts
-      let operational = 0, partial = 0, outage = 0;
-      
-      components.forEach(component => {
-        if (component.status === "operational") operational++;
-        else if (component.status.includes("partial")) partial++;
-        else if (component.status.includes("outage")) outage++;
-      });
+  let operational = 0, partial = 0, outage = 0;
+  
+  components.forEach(component => {
+    if (component.status === "operational") operational++;
+    else if (component.status.includes("partial")) partial++;
+    else if (component.status.includes("outage")) outage++;
+  });
 
-      // Update uptime based on incidents
-      const thirtyDaysAgo = new Date().toLocaleString('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'short'
-        });
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-      
-      const recentIncidents = incidents.filter(incident => {
-        const incidentDate = new Date(incident.created_at);
-        return incidentDate > thirtyDaysAgo;
-      });
-      
-      // Calculate uptime percentage (simulated)
-      const uptimePercentage = (99.98 - (recentIncidents.length * 0.01)).toFixed(2);
-      document.getElementById("uptime-value").textContent = `${uptimePercentage}%`;
-      
-      // Update incidents count
-      document.getElementById("incidents-value").textContent = recentIncidents.length;
-      
-      // Update API availability based on component status
-      const apiAvailability = operational === components.length ? "100%" : 
-                             (operational / components.length * 100).toFixed(1) + "%";
-      document.getElementById("api-availability").textContent = apiAvailability;
-    }
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const recentIncidents = incidents.filter(incident => {
+    const incidentDate = new Date(incident.created_at);
+    return incidentDate > thirtyDaysAgo;
+  });
+
+  const uptimePercentage = (99.98 - (recentIncidents.length * 0.01)).toFixed(2);
+  document.getElementById("uptime-value").textContent = `${uptimePercentage}%`;
+  document.getElementById("incidents-value").textContent = recentIncidents.length;
+
+  const apiAvailability = operational === components.length
+    ? "100%"
+    : ((operational / components.length) * 100).toFixed(1) + "%";
+
+  document.getElementById("api-availability").textContent = apiAvailability;
+}
+
 
     function renderComponents(components) {
       componentsList.innerHTML = "";
