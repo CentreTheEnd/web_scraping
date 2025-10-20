@@ -897,7 +897,10 @@
       });
 
       // Update uptime based on incidents
-      const thirtyDaysAgo = new Date();
+      const thirtyDaysAgo = new Date().toLocaleString('en-US', {
+          dateStyle: 'medium',
+          timeStyle: 'short'
+        });
       thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
       
       const recentIncidents = incidents.filter(incident => {
@@ -985,7 +988,10 @@
         <tbody>
           ${sortedIncidents.map(incident => `
             <tr>
-              <td>${new Date(incident.created_at).toLocaleDateString()}</td>
+              <td>${new Date(incident.created_at).toLocaleString('en-US', {
+          dateStyle: 'medium',
+          timeStyle: 'short'
+        })}</td>
               <td>${incident.name}</td>
               <td>
                 <span class="status-badge ${getIncidentStatusClass(incident.status)}">
@@ -1020,7 +1026,10 @@
     function updateStatusHistory(statusData) {
       // Add current status to history
       statusHistory.push({
-        timestamp: new Date(),
+        timestamp: new Date().toLocaleString('en-US', {
+          dateStyle: 'medium',
+          timeStyle: 'short'
+        }),
         status: statusData.status.description,
         indicator: statusData.indicator
       });
@@ -1137,11 +1146,16 @@
         // Shift data and add new point
         performanceData.shift();
         performanceData.push({
-          label: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+          label: new Date().toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}),
           response: 120 + Math.random() * 60,
           uptime: 99.5 + Math.random() * 0.5
         });
       }
+
+      // .toLocaleString('en-US', {
+      //      dateStyle: 'medium',
+      //      timeStyle: 'short'
+      //  })
       
       const ctx = document.getElementById('performance-chart').getContext('2d');
       
