@@ -1,0 +1,61 @@
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background: #1e293b;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  width: 90%;
+  max-width: 400px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #e2e8f0;
+}
+
+.status-card i {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.status-card h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-card p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+small {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* Status Colors */
+.ok i {
+  color: #10b981;
+}
+
+.warning i {
+  color: #f59e0b;
+}
+
+.critical i {
+  color: #ef4444;
+}
