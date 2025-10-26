@@ -16,10 +16,25 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'Cheerio - HTML Parsing & Data Extraction',
             file: 'sections/cheerio.html'
         },
+        inspect: {
+            icon: 'fas fa-search',
+            title: 'Inspection Tools - Analyze HTTP Traffic',
+            file: 'sections/inspect.html'
+        },
         reqable: {
             icon: 'fas fa-network-wired',
-            title: 'Reqable - HTTP Traffic Analysis',
+            title: 'Reqable - Advanced HTTP Debugging',
             file: 'sections/reqable.html'
+        },
+        proxypin: {
+            icon: 'fas fa-shield-alt',
+            title: 'ProxyPin - Modern Proxy Tool',
+            file: 'sections/proxypin.html'
+        },
+        'chrome-console': {
+            icon: 'fab fa-chrome',
+            title: 'Chrome Console - Browser DevTools',
+            file: 'sections/chrome-console.html'
         },
         http: {
             icon: 'fas fa-exchange-alt',
@@ -53,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!sectionData) return;
         
         // Show loading indicator
-        mainContent.innerHTML = '<p>Loading content...</p>';
+        mainContent.innerHTML = '<p>Loading...</p>';
         
         // Fetch section content
         fetch(sectionData.file)
@@ -67,6 +82,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Create and display the section
                 const sectionHTML = createSectionHTML(sectionId, sectionData, content);
                 mainContent.innerHTML = sectionHTML;
+                
+                // Add event listeners for tool cards in inspect section
+                if (sectionId === 'inspect') {
+                    setTimeout(() => {
+                        document.querySelectorAll('.course-card').forEach(card => {
+                            card.addEventListener('click', function() {
+                                const target = this.getAttribute('data-target');
+                                if (target) {
+                                    showSection(target);
+                                }
+                            });
+                        });
+                    }, 100);
+                }
                 
                 // Show the section
                 const targetSection = document.getElementById(sectionId);
@@ -116,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start learning button
     if (startLearningBtn) {
         startLearningBtn.addEventListener('click', function() {
-            showSection('cheerio');
+            showSection('http');
         });
     }
     
