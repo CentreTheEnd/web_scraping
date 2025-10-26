@@ -1,0 +1,124 @@
+<div class="course-overview">
+    <p>Welcome to Web Scraping Course! This comprehensive guide will teach you how to efficiently extract data from websites using modern tools and techniques.</p>
+    
+    <h3>What You'll Learn</h3>
+    
+    <div class="course-grid">
+        <div class="course-card">
+            <div class="card-header">
+                <h3>Cheerio</h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>HTML Parsing & DOM Manipulation</li>
+                    <li>CSS Selectors & Data Extraction</li>
+                    <li>Working with HTML Elements</li>
+                    <li>Practical Examples & Use Cases</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="card-header">
+                <h3>Reqable</h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>HTTP Traffic Analysis</li>
+                    <li>Request/Response Inspection</li>
+                    <li>Android Certificate Setup</li>
+                    <li>Real-time Traffic Monitoring</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="course-card">
+            <div class="card-header">
+                <h3>HTTP</h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>HTTP Requests & Responses</li>
+                    <li>Headers & Status Codes</li>
+                    <li>Fetch API & Axios</li>
+                    <li>API Communication</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <h3>Getting Started</h3>
+    <p>To begin your web scraping journey, follow these steps:</p>
+    
+    <div class="step-guide">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Learn HTTP Basics</h4>
+                <p>Understand how web communication works through HTTP requests and responses.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Master Cheerio</h4>
+                <p>Learn to parse HTML and extract data using CSS selectors and DOM manipulation.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Use Reqable for Analysis</h4>
+                <p>Analyze HTTP traffic to understand website behavior and API endpoints.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Build Your Scraper</h4>
+                <p>Combine all knowledge to create efficient and reliable web scrapers.</p>
+            </div>
+        </div>
+    </div>
+    
+    <h3>Quick Start Example</h3>
+    <p>Here's a simple example to get you started with web scraping using Cheerio:</p>
+    
+    <div class="code-example">
+        <span class="code-comment">// Basic web scraping setup</span><br>
+        <span class="code-keyword">const</span> axios = <span class="code-function">require</span>(<span class="code-string">'axios'</span>);<br>
+        <span class="code-keyword">const</span> cheerio = <span class="code-function">require</span>(<span class="code-string">'cheerio'</span>);<br><br>
+        
+        <span class="code-comment">// Function to scrape website titles</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">scrapeTitles</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(<span class="code-string">'https://example.com'</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> $ = cheerio.<span class="code-function">load</span>(response.data);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Extract all heading texts</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> titles = [];<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$(<span class="code-string">'h1, h2, h3'</span>).<span class="code-function">each</span>((index, element) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;titles.<span class="code-function">push</span>($(element).<span class="code-function">text</span>());<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> titles;<br>
+        &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">error</span>(<span class="code-string">'Error scraping:'</span>, error);<br>
+        &nbsp;&nbsp;}<br>
+        }<br><br>
+        
+        <span class="code-comment">// Execute the scraper</span><br>
+        <span class="code-function">scrapeTitles</span>().<span class="code-function">then</span>(titles => {<br>
+        &nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'Found titles:'</span>, titles);<br>
+        });
+    </div>
+    
+    <div class="sub-section">
+        <h3>Ready to Start?</h3>
+        <p>Click the button below to begin learning about Cheerio, or use the navigation menu to explore any section you're interested in.</p>
+        <button class="btn start-learning-btn" style="margin-top: 1rem;">Start with Cheerio</button>
+    </div>
+</div>
