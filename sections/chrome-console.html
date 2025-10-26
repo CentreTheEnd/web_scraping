@@ -1,0 +1,220 @@
+<p>The Chrome Developer Tools (DevTools) console is a powerful built-in tool for web analysis and debugging. It's readily available in every Chrome browser and requires no additional installation.</p>
+
+<div class="sub-section">
+    <h3>What is Chrome Console?</h3>
+    <p>Chrome DevTools provides comprehensive tools for web developers, with the Network tab being particularly useful for web scraping analysis:</p>
+    <ul>
+        <li>Real-time network request monitoring</li>
+        <li>JavaScript execution and debugging</li>
+        <li>DOM inspection and manipulation</li>
+        <li>Performance analysis</li>
+        <li>Memory and storage inspection</li>
+    </ul>
+</div>
+
+<h3>Accessing Chrome DevTools</h3>
+
+<div class="step-guide">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Open DevTools</h4>
+            <p>Right-click on any webpage and select "Inspect" or press <code>F12</code> / <code>Ctrl+Shift+I</code> (Windows) or <code>Cmd+Opt+I</code> (Mac).</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Navigate to Network Tab</h4>
+            <p>Click on the "Network" tab to view all network requests made by the webpage.</p>
+            <img src="images/chrome-console/network-tab.jpg" alt="Chrome Network Tab" class="step-image">
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Start Recording</h4>
+            <p>Ensure the recording button (red circle) is active. Refresh the page to capture all requests.</p>
+        </div>
+    </div>
+</div>
+
+<h3>Network Tab Features for Web Scraping</h3>
+
+<div class="sub-section">
+    <h4>Request Inspection</h4>
+    <p>Click on any request to view detailed information:</p>
+    <ul>
+        <li><strong>Headers:</strong> Request and response headers</li>
+        <li><strong>Preview:</strong> Formatted response data</li>
+        <li><strong>Response:</strong> Raw response data</li>
+        <li><strong>Timing:</strong> Request lifecycle timing</li>
+        <li><strong>Cookies:</strong> Request and response cookies</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Filtering and Search</h4>
+    <p>Use the filter bar to focus on specific requests:</p>
+    <div class="code-example">
+        <span class="code-comment">// Common filter patterns:</span><br>
+        -domain:example.com          <span class="code-comment">// Filter by domain</span><br>
+        -method:POST                 <span class="code-comment">// Filter by method</span><br>
+        -larger-than:1K              <span class="code-comment">// Filter by size</span><br>
+        -has-response-header:json    <span class="code-comment">// Filter by content type</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Exporting Requests</h4>
+    <p>Right-click on requests to export them for use in your scraping scripts:</p>
+    <ul>
+        <li>Copy as cURL</li>
+        <li>Copy as fetch</li>
+        <li>Copy as Node.js fetch</li>
+        <li>Save as HAR file</li>
+    </ul>
+</div>
+
+<h3>Console Tab for Advanced Analysis</h3>
+
+<div class="sub-section">
+    <h4>JavaScript Execution</h4>
+    <p>Use the Console tab to execute JavaScript and interact with the webpage:</p>
+    <div class="code-example">
+        <span class="code-comment">// Extract all links from the page</span><br>
+        <span class="code-keyword">const</span> links = <span class="code-function">Array</span>.<span class="code-function">from</span>(document.<span class="code-function">querySelectorAll</span>(<span class="code-string">'a'</span>))<br>
+        &nbsp;&nbsp;.<span class="code-function">map</span>(link => ({<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;text: link.<span class="code-function">textContent</span>.<span class="code-function">trim</span>(),<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;href: link.<span class="code-function">href</span><br>
+        &nbsp;&nbsp;}));<br>
+        <span class="code-function">console</span>.<span class="code-function">table</span>(links);
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>API Testing</h4>
+    <p>Test API endpoints directly from the console:</p>
+    <div class="code-example">
+        <span class="code-comment">// Test an API endpoint found in Network tab</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">testAPI</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">'/api/data'</span>, {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Authorization'</span>: <span class="code-string">'Bearer token'</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'API Response:'</span>, data);<br>
+        &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">error</span>(<span class="code-string">'API Error:'</span>, error);<br>
+        &nbsp;&nbsp;}<br>
+        }<br>
+        <span class="code-function">testAPI</span>();
+    </div>
+</div>
+
+<h3>Practical Web Scraping Analysis</h3>
+
+<div class="sub-section">
+    <h4>Step 1: Identify Data Sources</h4>
+    <p>Use the Network tab to find where the website gets its data:</p>
+    <ul>
+        <li>Look for XHR/Fetch requests</li>
+        <li>Identify JSON API endpoints</li>
+        <li>Note GraphQL queries if present</li>
+        <li>Check for WebSocket connections</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Step 2: Analyze Request Patterns</h4>
+    <p>Study how the website makes requests:</p>
+    <div class="code-example">
+        <span class="code-comment">// Common patterns to look for:</span><br>
+        - Pagination parameters (?page=2&limit=50)<br>
+        - Filter parameters (?category=books&sort=price)<br>
+        - Authentication headers (Authorization: Bearer ...)<br>
+        - CSRF tokens (X-CSRF-Token: ...)<br>
+        - User-Agent spoofing
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Step 3: Test API Endpoints</h4>
+    <p>Use the console to test API endpoints directly:</p>
+    <div class="code-example">
+        <span class="code-comment">// Copy request as fetch from Network tab</span><br>
+        <span class="code-keyword">const</span> response = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">"https://api.example.com/data"</span>, {<br>
+        &nbsp;&nbsp;<span class="code-string">"headers"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"accept"</span>: <span class="code-string">"application/json"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"authorization"</span>: <span class="code-string">"Bearer ..."</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"cache-control"</span>: <span class="code-string">"no-cache"</span><br>
+        &nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;<span class="code-string">"referrer"</span>: <span class="code-string">"https://example.com/"</span>,<br>
+        &nbsp;&nbsp;<span class="code-string">"method"</span>: <span class="code-string">"GET"</span><br>
+        });<br>
+        <span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+        <span class="code-function">console</span>.<span class="code-function">log</span>(data);
+    </div>
+</div>
+
+<h3>Advanced Console Techniques</h3>
+
+<div class="sub-section">
+    <h4>Monitoring Network Activity</h4>
+    <p>Use the Performance tab to monitor network activity over time:</p>
+    <div class="code-example">
+        <span class="code-comment">// Record performance and analyze network requests</span><br>
+        <span class="code-comment">// 1. Go to Performance tab</span><br>
+        <span class="code-comment">// 2. Click record</span><br>
+        <span class="code-comment">// 3. Interact with the page</span><br>
+        <span class="code-comment">// 4. Stop recording and analyze network section</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>XHR/Fetch Breakpoints</h4>
+    <p>Set breakpoints on specific XHR/fetch requests to debug API calls:</p>
+    <div class="code-example">
+        <span class="code-comment">// In Sources tab, under XHR/Fetch Breakpoints:</span><br>
+        <span class="code-comment">// 1. Add breakpoint for URL containing "/api/"</span><br>
+        <span class="code-comment">// 2. The debugger will pause when matching requests are made</span><br>
+        <span class="code-comment">// 3. Inspect the call stack and variables</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Local Overrides</h4>
+    <p>Override website files to test modifications without changing source code:</p>
+    <div class="code-example">
+        <span class="code-comment">// Steps for local overrides:</span><br>
+        <span class="code-comment">// 1. Go to Sources > Overrides</span><br>
+        <span class="code-comment">// 2. Select a folder for overrides</span><br>
+        <span class="code-comment">// 3. Edit files in Sources tab</span><br>
+        <span class="code-comment">// 4. Changes persist across page reloads</span>
+    </div>
+</div>
+
+<h3>Useful Console Commands for Scraping</h3>
+
+<div class="code-example">
+    <span class="code-comment">// Get all images on the page</span><br>
+    <span class="code-function">Array</span>.<span class="code-function">from</span>(document.<span class="code-function">images</span>).<span class="code-function">map</span>(img => img.<span class="code-function">src</span>);<br><br>
+    
+    <span class="code-comment">// Extract all text content</span><br>
+    document.body.<span class="code-function">innerText</span>;<br><br>
+    
+    <span class="code-comment">// Monitor network requests</span><br>
+    <span class="code-keyword">const</span> requests = [];<br>
+    <span class="code-keyword">const</span> originalFetch = window.<span class="code-function">fetch</span>;<br>
+    window.<span class="code-function">fetch</span> = <span class="code-keyword">function</span>(...args) {<br>
+    &nbsp;&nbsp;requests.<span class="code-function">push</span>(args);<br>
+    &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">originalFetch</span>.<span class="code-function">apply</span>(<span class="code-keyword">this</span>, args);<br>
+    };<br><br>
+    
+    <span class="code-comment">// Check for hidden data in JavaScript variables</span><br>
+    <span class="code-function">JSON</span>.<span class="code-function">stringify</span>(window.<span class="code-function">__INITIAL_STATE__</span>
