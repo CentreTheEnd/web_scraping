@@ -2,8 +2,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
-    const startLearningBtn = document.querySelector('.start-learning-btn');
-    const startSection = document.querySelector('.hero');
+    const startBtn = document.querySelector('.start-btn');
+    const heroSection = document.getElementById('hero');
+    const mainNav = document.getElementById('main-nav');
+    const inspectSubNav = document.getElementById('inspect-sub-nav');
+    const logo = document.querySelector('.logo');
+    const homeLinks = document.querySelectorAll('.home-link, .inspect-home-link');
     
     // Section metadata
     const sectionMetadata = {
@@ -44,6 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
+    // Function to show/hide navigation based on current section
+    function updateNavigation(sectionId) {
+        // Hide all navigations first
+        mainNav.style.display = 'none';
+        inspectSubNav.style.display = 'none';
+        
+        // Show appropriate navigation
+        if (sectionId === 'home') {
+            // Show hero, hide main nav
+            heroSection.classList.add('active');
+            mainNav.style.display = 'none';
+        } else if (['reqable', 'proxypin', 'chrome-console'].includes(sectionId)) {
+            // Show inspect sub nav for tool sections
+            inspectSubNav.style.display = 'block';
+        } else if (sectionId !== 'home') {
+            // Show main nav for other sections
+            mainNav.style.display = 'block';
+        }
+    }
+    
     // Function to create section HTML
     function createSectionHTML(sectionId, sectionData, content) {
         return `
@@ -59,10 +83,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to show a specific section
     function showSection(sectionId) {
-        // Hide all sections
+        // Hide all sections including hero
         document.querySelectorAll('main section').forEach(section => {
             section.classList.remove('active');
         });
+        heroSection.classList.remove('active');
+        
+        // Update navigation based on section
+        updateNavigation(sectionId);
+        
+        // If home section, just show hero and return
+        if (sectionId === 'home') {
+            heroSection.classList.add('active');
+            return;
+        }
         
         // Get section metadata
         const sectionData = sectionMetadata[sectionId];
@@ -104,13 +138,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     targetSection.classList.add('active');
                 }
                 
-                // Update active button
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('data-target') === sectionId) {
-                        link.classList.add('active');
-                    }
-                });
+                // Update active button in appropriate navigation
+                const currentNav = ['reqable', 'proxypin', 'chrome-console'].includes(sectionId) ? 
+                    inspectSubNav : mainNav;
+                
+                if (currentNav) {
+                    currentNav.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('data-target') === sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
                 
                 // Scroll to top of the section
                 if (targetSection) {
@@ -134,6 +173,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Add click event to sub navigation links
+    document.querySelectorAll('.sub-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const targetSection = this.getAttribute('data-target');
+            showSection(targetSection);
+        });
+    });
+    
     // Add click event to footer links
     document.querySelectorAll('.footer-links a[data-target]').forEach(link => {
         link.addEventListener('click', function(e) {
@@ -143,14 +190,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Start learning button
-    if (startLearningBtn) {
-        startLearningBtn.addEventListener('click', function() {
-            showSection('http');
+    // Start learning button - show inspect section
+    if (startBtn) {
+        startBtn.addEventListener('click', function() {
+            showSection('inspect');
         });
     }
     
-    // Show intro section by default
-    // showSection('intro');
-    startSection.classList.add('active');
+    // Logo click - go home
+    if (logo) {
+        logo.addEventListener('click', function() {
+            showSection('home');
+        });
+    }
+    
+    // Home links click - go home
+    homeLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (this.classList.contains('inspect-home-link')) {
+                showSection('inspect');
+            } else {
+                showSection('home');
+            }
+        });
+    });
+    
+    // Show hero section by default
+    showSection('home');
 });
