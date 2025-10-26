@@ -1,0 +1,200 @@
+<p>Cheerio is a fast, flexible, and lean implementation of core jQuery designed specifically for the server. It's the perfect tool for parsing HTML and extracting data in Node.js environments.</p>
+
+<div class="sub-section">
+    <h3>What is Cheerio?</h3>
+    <p>Cheerio parses markup and provides an API for traversing/manipulating the resulting data structure. It doesn't interpret the result as a web browser does, but rather parses HTML and allows you to manipulate it with a jQuery-like syntax.</p>
+</div>
+
+<h3>Installation & Setup</h3>
+<div class="code-example">
+    <span class="code-comment">// Install Cheerio and Axios for HTTP requests</span><br>
+    <span class="code-keyword">npm</span> install cheerio axios
+</div>
+
+<h3>Key Functions & Methods</h3>
+<table class="methods-table">
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>load(html)</td>
+            <td>Parse HTML and create Cheerio instance</td>
+            <td>const $ = cheerio.load(htmlString)</td>
+        </tr>
+        <tr>
+            <td>find(selector)</td>
+            <td>Find descendants of selected elements</td>
+            <td>$('div').find('.class')</td>
+        </tr>
+        <tr>
+            <td>each(function)</td>
+            <td>Iterate over a collection of elements</td>
+            <td>$('li').each((i, el) => { ... })</td>
+        </tr>
+        <tr>
+            <td>text()</td>
+            <td>Get the text content of elements</td>
+            <td>$('h1').text()</td>
+        </tr>
+        <tr>
+            <td>html()</td>
+            <td>Get the HTML content of elements</td>
+            <td>$('div').html()</td>
+        </tr>
+        <tr>
+            <td>attr(name)</td>
+            <td>Get the value of an attribute</td>
+            <td>$('img').attr('src')</td>
+        </tr>
+        <tr>
+            <td>addClass(className)</td>
+            <td>Add class to selected elements</td>
+            <td>$('div').addClass('new-class')</td>
+        </tr>
+        <tr>
+            <td>removeClass(className)</td>
+            <td>Remove class from selected elements</td>
+            <td>$('div').removeClass('old-class')</td>
+        </tr>
+        <tr>
+            <td>hasClass(className)</td>
+            <td>Check if element has specific class</td>
+            <td>$('div').hasClass('active')</td>
+        </tr>
+        <tr>
+            <td>parent()</td>
+            <td>Get the parent of selected elements</td>
+            <td>$('span').parent()</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Working with HTML Elements</h3>
+<p>Cheerio provides powerful methods for selecting and manipulating HTML elements:</p>
+
+<div class="code-example">
+    <span class="code-comment">// Different ways to select elements</span><br>
+    <span class="code-keyword">const</span> $ = cheerio.<span class="code-function">load</span>(html);<br><br>
+    
+    <span class="code-comment">// Select by tag name</span><br>
+    <span class="code-keyword">const</span> paragraphs = $(<span class="code-string">'p'</span>);<br><br>
+    
+    <span class="code-comment">// Select by class</span><br>
+    <span class="code-keyword">const</span> items = $(<span class="code-string">'.item'</span>);<br><br>
+    
+    <span class="code-comment">// Select by ID</span><br>
+    <span class="code-keyword">const</span> header = $(<span class="code-string">'#header'</span>);<br><br>
+    
+    <span class="code-comment">// Select by attribute</span><br>
+    <span class="code-keyword">const</span> images = $(<span class="code-string">'[src]'</span>);<br><br>
+    
+    <span class="code-comment">// Complex selectors</span><br>
+    <span class="code-keyword">const</span> links = $(<span class="code-string">'div.content a.external'</span>);
+</div>
+
+<h3>Data Extraction Examples</h3>
+
+<div class="sub-section">
+    <h4>Example 1: Extracting Product Information</h4>
+    <div class="code-example">
+        <span class="code-keyword">async function</span> <span class="code-function">scrapeProducts</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(<span class="code-string">'https://example-store.com/products'</span>);<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> $ = cheerio.<span class="code-function">load</span>(response.data);<br><br>
+        
+        &nbsp;&nbsp;<span class="code-keyword">const</span> products = [];<br>
+        &nbsp;&nbsp;$(<span class="code-string">'.product'</span>).<span class="code-function">each</span>((index, element) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> product = {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: $(element).<span class="code-function">find</span>(<span class="code-string">'.name'</span>).<span class="code-function">text</span>().<span class="code-function">trim</span>(),<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price: $(element).<span class="code-function">find</span>(<span class="code-string">'.price'</span>).<span class="code-function">text</span>().<span class="code-function">trim</span>(),<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image: $(element).<span class="code-function">find</span>(<span class="code-string">'img'</span>).<span class="code-function">attr</span>(<span class="code-string">'src'</span>)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;products.<span class="code-function">push</span>(product);<br>
+        &nbsp;&nbsp;});<br><br>
+        
+        &nbsp;&nbsp;<span class="code-keyword">return</span> products;<br>
+        }
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Example 2: Extracting Table Data</h4>
+    <div class="code-example">
+        <span class="code-keyword">function</span> <span class="code-function">extractTableData</span>($) {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> tableData = [];<br>
+        &nbsp;&nbsp;$(<span class="code-string">'table tr'</span>).<span class="code-function">each</span>((index, row) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (index === 0) <span class="code-keyword">return</span>; <span class="code-comment">// Skip header row</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> rowData = {};<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;$(row).<span class="code-function">find</span>(<span class="code-string">'td'</span>).<span class="code-function">each</span>((colIndex, cell) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rowData[<span class="code-string">`col<span class="code-string">${colIndex}`</span>] = $(cell).<span class="code-function">text</span>().<span class="code-function">trim</span>();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;tableData.<span class="code-function">push</span>(rowData);<br>
+        &nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> tableData;<br>
+        }
+    </div>
+</div>
+
+<h3>Advanced Selectors</h3>
+<table class="selector-table">
+    <thead>
+        <tr>
+            <th>Selector</th>
+            <th>Example</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Element</td>
+            <td>$('div')</td>
+            <td>Selects all &lt;div&gt; elements</td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td>$('.className')</td>
+            <td>Selects all elements with class="className"</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td>$('#idName')</td>
+            <td>Selects the element with id="idName"</td>
+        </tr>
+        <tr>
+            <td>Attribute</td>
+            <td>$('[name="email"]')</td>
+            <td>Selects elements with name="email"</td>
+        </tr>
+        <tr>
+            <td>Multiple</td>
+            <td>$('div, p')</td>
+            <td>Selects all &lt;div&gt; and &lt;p&gt; elements</td>
+        </tr>
+        <tr>
+            <td>Child</td>
+            <td>$('div > p')</td>
+            <td>Selects direct child &lt;p&gt; elements of &lt;div&gt;</td>
+        </tr>
+        <tr>
+            <td>Descendant</td>
+            <td>$('div p')</td>
+            <td>Selects all &lt;p&gt; elements inside &lt;div&gt;</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="sub-section">
+    <h3>Best Practices</h3>
+    <ul>
+        <li>Always handle errors with try-catch blocks</li>
+        <li>Use specific selectors to avoid extracting unwanted data</li>
+        <li>Respect website terms of service and robots.txt</li>
+        <li>Implement rate limiting to avoid overwhelming servers</li>
+        <li>Cache results when possible to reduce repeated requests</li>
+    </ul>
+</div>
