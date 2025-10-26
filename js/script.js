@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Start learning button - show inspect section
     if (startBtn) {
         startBtn.addEventListener('click', function() {
-            showSection('inspect');
+            showSection('intro');
         });
     }
     
