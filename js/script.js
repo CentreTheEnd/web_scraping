@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
     const startBtn = document.querySelector('.start-btn');
+    const learningBtn = document.querySelector('.btn start-learning-btn')
     const heroSection = document.getElementById('hero');
     const mainNav = document.getElementById('main-nav');
     const inspectSubNav = document.getElementById('inspect-sub-nav');
@@ -194,6 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (startBtn) {
         startBtn.addEventListener('click', function() {
             showSection('intro');
+        });
+    }
+
+    if (learningBtn) {
+        learningBtn.addEventListener('click', function() {
+            showSection('http');
         });
     }
     
