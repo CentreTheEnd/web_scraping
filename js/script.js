@@ -150,5 +150,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Show intro section by default
-    showSection('intro');
+    // showSection('intro');
 });
