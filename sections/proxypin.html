@@ -1,0 +1,223 @@
+<p>ProxyPin is a modern, cross-platform web debugging proxy tool designed for developers and testers. It provides an intuitive interface for inspecting and manipulating HTTP/HTTPS traffic.</p>
+
+<div class="sub-section">
+    <h3>What is ProxyPin?</h3>
+    <p>ProxyPin offers a fresh approach to web debugging with features tailored for modern web development workflows:</p>
+    <ul>
+        <li>Real-time HTTP/HTTPS traffic inspection</li>
+        <li>WebSocket message monitoring</li>
+        <li>API mocking and testing</li>
+        <li>Team collaboration features</li>
+        <li>Cloud synchronization</li>
+        <li>Automatic HTTPS certificate installation</li>
+    </ul>
+</div>
+
+<h3>Installation & Setup</h3>
+
+<div class="step-guide">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Download ProxyPin</h4>
+            <p>Visit the official ProxyPin website and download the version for your operating system.</p>
+            <a href="https://proxypin.io" target="_blank" class="external-link">
+                <i class="fas fa-external-link-alt"></i> Visit ProxyPin Official Website
+            </a>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Install the Application</h4>
+            <p>Run the installer and follow the setup wizard. ProxyPin will automatically install the required SSL certificates.</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Configure Your Device</h4>
+            <p>Set your device's proxy settings to use ProxyPin (default: localhost:8000). The app provides clear instructions for different platforms.</p>
+            <img src="images/proxypin/setup.jpg" alt="ProxyPin Setup" class="step-image">
+        </div>
+    </div>
+</div>
+
+<h3>Key Features for Web Scraping</h3>
+
+<div class="sub-section">
+    <h4>Real-time Traffic Monitoring</h4>
+    <p>ProxyPin displays all HTTP/HTTPS traffic in real-time with a clean, organized interface:</p>
+    <ul>
+        <li>Color-coded request methods (GET, POST, PUT, etc.)</li>
+        <li>Quick status code filtering</li>
+        <li>Search and filter capabilities</li>
+        <li>Request/response timeline visualization</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>WebSocket Support</h4>
+    <p>Monitor and debug WebSocket connections, which are increasingly used for real-time data:</p>
+    <div class="code-example">
+        <span class="code-comment">// WebSocket connections often used for:</span><br>
+        <span class="code-comment">// - Real-time notifications</span><br>
+        <span class="code-comment">// - Live data updates</span><br>
+        <span class="code-comment">// - Chat applications</span><br>
+        <span class="code-comment">// - Stock tickers</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>API Mocking</h4>
+    <p>Create mock responses for API endpoints to test your scrapers without hitting live servers:</p>
+    <div class="code-example">
+        <span class="code-comment">// Mock response configuration in ProxyPin</span><br>
+        {<br>
+        &nbsp;&nbsp;<span class="code-string">"url"</span>: <span class="code-string">"/api/users/*"</span>,<br>
+        &nbsp;&nbsp;<span class="code-string">"method"</span>: <span class="code-string">"GET"</span>,<br>
+        &nbsp;&nbsp;<span class="code-string">"response"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"status"</span>: 200,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"headers"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Content-Type"</span>: <span class="code-string">"application/json"</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"body"</span>: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"users"</span>: [<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="code-string">"id"</span>: 1, <span class="code-string">"name"</span>: <span class="code-string">"John"</span> },<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <span class="code-string">"id"</span>: 2, <span class="code-string">"name"</span>: <span class="code-string">"Jane"</span> }<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+</div>
+
+<h3>Using ProxyPin for Web Scraping Analysis</h3>
+
+<div class="sub-section">
+    <h4>Step 1: Start the Proxy</h4>
+    <p>Launch ProxyPin and ensure the proxy server is running. The status indicator should show green.</p>
+</div>
+
+<div class="sub-section">
+    <h4>Step 2: Configure Browser/Device</h4>
+    <p>Set your browser or device to use ProxyPin as its proxy server. Most browsers can be configured through extensions or system settings.</p>
+</div>
+
+<div class="sub-section">
+    <h4>Step 3: Capture Traffic</h4>
+    <p>Browse your target website and watch as ProxyPin captures all HTTP requests and responses in real-time.</p>
+</div>
+
+<div class="sub-section">
+    <h4>Step 4: Analyze API Patterns</h4>
+    <p>Look for patterns in the captured traffic:</p>
+    <ul>
+        <li>Identify main data API endpoints</li>
+        <li>Note authentication mechanisms</li>
+        <li>Understand request parameter patterns</li>
+        <li>Study response data structures</li>
+    </ul>
+</div>
+
+<h3>Advanced Usage</h3>
+
+<div class="sub-section">
+    <h4>Breakpoints and Interception</h4>
+    <p>Set breakpoints to pause and modify requests/responses:</p>
+    <div class="code-example">
+        <span class="code-comment">// Use breakpoints to:</span><br>
+        <span class="code-comment">// - Modify request headers</span><br>
+        <span class="code-comment">// - Change request parameters</span><br>
+        <span class="code-comment">// - Alter response data</span><br>
+        <span class="code-comment">// - Test error scenarios</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Script Injection</h4>
+    <p>Inject custom JavaScript into web pages for advanced analysis:</p>
+    <div class="code-example">
+        <span class="code-comment">// Example: Inject script to monitor DOM changes</span><br>
+        (<span class="code-keyword">function</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> observer = <span class="code-keyword">new</span> <span class="code-function">MutationObserver</span>((mutations) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;mutations.<span class="code-function">forEach</span>((mutation) => {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">log</span>(<span class="code-string">'DOM changed:'</span>, mutation);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;observer.<span class="code-function">observe</span>(document.body, {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;childList: <span class="code-keyword">true</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;subtree: <span class="code-keyword">true</span><br>
+        &nbsp;&nbsp;});<br>
+        })();
+    </div>
+</div>
+
+<div class="sub-section">
+    <h4>Team Collaboration</h4>
+    <p>ProxyPin's cloud features enable team collaboration:</p>
+    <ul>
+        <li>Share captured sessions with team members</li>
+        <li>Collaborate on API analysis</li>
+        <li>Maintain shared mock servers</li>
+        <li>Sync configurations across devices</li>
+    </ul>
+</div>
+
+<h3>Comparison with Other Tools</h3>
+
+<table class="tools-table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>ProxyPin</th>
+            <th>Reqable</th>
+            <th>Chrome DevTools</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>WebSocket Support</td>
+            <td>✅ Excellent</td>
+            <td>✅ Good</td>
+            <td>✅ Basic</td>
+        </tr>
+        <tr>
+            <td>API Mocking</td>
+            <td>✅ Advanced</td>
+            <td>🟡 Limited</td>
+            <td>❌ No</td>
+        </tr>
+        <tr>
+            <td>Team Features</td>
+            <td>✅ Cloud Sync</td>
+            <td>❌ No</td>
+            <td>❌ No</td>
+        </tr>
+        <tr>
+            <td>Mobile Debugging</td>
+            <td>✅ Easy</td>
+            <td>✅ Excellent</td>
+            <td>🟡 Limited</td>
+        </tr>
+        <tr>
+            <td>Scripting</td>
+            <td>✅ JavaScript</td>
+            <td>✅ JavaScript</td>
+            <td>✅ Console</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="sub-section">
+    <h3>Best Practices</h3>
+    <ul>
+        <li>Use filters to focus on relevant API endpoints</li>
+        <li>Create mock responses for testing without live data</li>
+        <li>Export important sessions for documentation</li>
+        <li>Use breakpoints for complex debugging scenarios</li>
+        <li>Leverage team features for collaborative projects</li>
+    </ul>
+</div>
