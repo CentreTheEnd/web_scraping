@@ -9,6 +9,7 @@
         <li>Debug mobile applications</li>
         <li>Test API endpoints</li>
         <li>Analyze website performance</li>
+        <li>Support for HTTP/2 and HTTP/3</li>
     </ul>
 </div>
 
@@ -53,7 +54,7 @@
         <div class="step-content">
             <h4>Enable Proxy in Reqable</h4>
             <p>In Reqable, go to Settings > Proxy and make sure the proxy is enabled. Note the IP address and port (default is 9090).</p>
-            <img src="images/android-step1.jpg" alt="Enable Proxy" class="step-image">
+            <img src="images/reqable/android-step1.jpg" alt="Enable Proxy" class="step-image">
         </div>
     </div>
     
@@ -62,7 +63,7 @@
         <div class="step-content">
             <h4>Export Certificate</h4>
             <p>In Reqable, go to Settings > Certificate and export the certificate in PEM format. Send this file to your Android device.</p>
-            <img src="images/android-step2.jpg" alt="Export Certificate" class="step-image">
+            <img src="images/reqable/android-step2.jpg" alt="Export Certificate" class="step-image">
         </div>
     </div>
     
@@ -71,7 +72,7 @@
         <div class="step-content">
             <h4>Install Certificate on Android</h4>
             <p>On your Android device, go to Settings > Security > Encryption & credentials > Install a certificate > CA certificate. Select the PEM file you transferred.</p>
-            <img src="images/android-step3.jpg" alt="Install Certificate" class="step-image">
+            <img src="images/reqable/android-step3.jpg" alt="Install Certificate" class="step-image">
         </div>
     </div>
     
@@ -80,7 +81,7 @@
         <div class="step-content">
             <h4>Configure Android Proxy</h4>
             <p>Go to Settings > Network & internet > Wi-Fi. Long press on your connected network, select Modify, then Advanced options. Set Proxy to Manual and enter the IP and port from Step 1.</p>
-            <img src="images/android-step4.jpg" alt="Configure Proxy" class="step-image">
+            <img src="images/reqable/android-step4.jpg" alt="Configure Proxy" class="step-image">
         </div>
     </div>
     
@@ -89,7 +90,7 @@
         <div class="step-content">
             <h4>Verify Setup</h4>
             <p>Open a browser on your Android device and visit any HTTPS website. You should see the traffic captured in Reqable.</p>
-            <img src="images/android-step5.jpg" alt="Verify Setup" class="step-image">
+            <img src="images/reqable/android-step5.jpg" alt="Verify Setup" class="step-image">
         </div>
     </div>
 </div>
@@ -109,6 +110,7 @@
         <li><strong>Body:</strong> Inspect request and response payloads</li>
         <li><strong>Timing:</strong> Analyze request/response timing</li>
         <li><strong>Raw:</strong> View raw HTTP data</li>
+        <li><strong>Hex:</strong> View binary data in hexadecimal format</li>
     </ul>
 </div>
 
@@ -120,6 +122,7 @@
         <li>Required headers and authentication</li>
         <li>Request parameters and payload formats</li>
         <li>Response data structure</li>
+        <li>Pagination and data loading patterns</li>
     </ul>
 </div>
 
@@ -131,12 +134,19 @@
         <span class="code-keyword">const</span> apiUrl = <span class="code-string">'https://api.example.com/data'</span>;<br>
         <span class="code-keyword">const</span> headers = {<br>
         &nbsp;&nbsp;<span class="code-string">'Authorization'</span>: <span class="code-string">'Bearer token_from_analysis'</span>,<br>
-        &nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span><br>
+        &nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span>,<br>
+        &nbsp;&nbsp;<span class="code-string">'User-Agent'</span>: <span class="code-string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'</span><br>
         };<br><br>
         
         <span class="code-comment">// Make the API request</span><br>
         <span class="code-keyword">async function</span> <span class="code-function">fetchData</span>() {<br>
-        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(apiUrl, { headers });<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(apiUrl, { <br>
+        &nbsp;&nbsp;&nbsp;&nbsp;headers,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;params: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page: 1,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 100<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;});<br>
         &nbsp;&nbsp;<span class="code-keyword">return</span> response.data;<br>
         }
     </div>
@@ -152,6 +162,7 @@
         <li>Modify request body data</li>
         <li>Alter response data before it reaches the client</li>
         <li>Simulate different server responses</li>
+        <li>Inject custom JavaScript code</li>
     </ul>
 </div>
 
@@ -166,12 +177,59 @@
 </div>
 
 <div class="sub-section">
-    <h3>Best Practices</h3>
+    <h4>Scripting Support</h4>
+    <p>Reqable supports JavaScript scripting for advanced automation:</p>
+    <div class="code-example">
+        <span class="code-comment">// Example script to modify requests</span><br>
+        <span class="code-keyword">function</span> <span class="code-function">onRequest</span>(context, request) {<br>
+        &nbsp;&nbsp;<span class="code-comment">// Add custom header to all requests</span><br>
+        &nbsp;&nbsp;request.<span class="code-function">header</span>(<span class="code-string">'X-Custom-Header'</span>, <span class="code-string">'MyValue'</span>);<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> request;<br>
+        }<br><br>
+        
+        <span class="code-keyword">function</span> <span class="code-function">onResponse</span>(context, response) {<br>
+        &nbsp;&nbsp;<span class="code-comment">// Modify response data</span><br>
+        &nbsp;&nbsp;<span class="code-keyword">if</span> (response.<span class="code-function">header</span>(<span class="code-string">'Content-Type'</span>).<span class="code-function">includes</span>(<span class="code-string">'json'</span>)) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = response.<span class="code-function">json</span>();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;data.<span class="code-function">modified</span> = <span class="code-keyword">true</span>;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;response.<span class="code-function">body</span> = <span class="code-function">JSON</span>.<span class="code-function">stringify</span>(data);<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> response;<br>
+        }
+    </div>
+</div>
+
+<h3>Best Practices for Web Scraping</h3>
+
+<div class="sub-section">
+    <h4>Filtering and Search</h4>
+    <p>Use Reqable's powerful filtering to focus on relevant traffic:</p>
     <ul>
-        <li>Use filters to focus on relevant traffic</li>
+        <li>Filter by domain or URL pattern</li>
+        <li>Search for specific headers or body content</li>
+        <li>Use regular expressions for complex patterns</li>
+        <li>Save filter presets for different projects</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Session Management</h4>
+    <p>Organize your analysis sessions effectively:</p>
+    <ul>
         <li>Save important sessions for future reference</li>
-        <li>Use breakpoints for complex debugging scenarios</li>
+        <li>Export session data for team collaboration</li>
+        <li>Use workspace to organize multiple projects</li>
         <li>Clear session data regularly to improve performance</li>
-        <li>Export configuration for team collaboration</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h3>Performance Tips</h3>
+    <ul>
+        <li>Use filters to reduce noise and focus on relevant traffic</li>
+        <li>Enable compression for large session files</li>
+        <li>Use breakpoints selectively to avoid performance impact</li>
+        <li>Clear session history regularly</li>
+        <li>Export configuration for quick setup on different machines</li>
     </ul>
 </div>
