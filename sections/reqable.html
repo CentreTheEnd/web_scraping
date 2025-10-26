@@ -1,0 +1,177 @@
+<p>Reqable is a powerful cross-platform HTTP debugging proxy that allows you to intercept, inspect, and modify HTTP/HTTPS traffic between clients and servers.</p>
+
+<div class="sub-section">
+    <h3>What is Reqable?</h3>
+    <p>Reqable is a modern alternative to tools like Charles Proxy and Fiddler. It provides a clean interface for analyzing web traffic, debugging APIs, and testing web applications. With Reqable, you can:</p>
+    <ul>
+        <li>Monitor all HTTP/HTTPS traffic in real-time</li>
+        <li>Intercept and modify requests/responses</li>
+        <li>Debug mobile applications</li>
+        <li>Test API endpoints</li>
+        <li>Analyze website performance</li>
+    </ul>
+</div>
+
+<h3>Download & Installation</h3>
+<p>Download Reqable from the official website:</p>
+<a href="https://reqable.com" target="_blank" class="external-link">
+    <i class="fas fa-external-link-alt"></i> Visit Reqable Official Website
+</a>
+
+<div class="step-guide">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Download Reqable</h4>
+            <p>Visit the official Reqable website and download the appropriate version for your operating system (Windows, macOS, or Linux).</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Install the Application</h4>
+            <p>Run the installer and follow the on-screen instructions to complete the installation process.</p>
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Launch Reqable</h4>
+            <p>Open Reqable and familiarize yourself with the interface. The main components are the session list, request/response viewer, and tools panel.</p>
+        </div>
+    </div>
+</div>
+
+<h3>Android Certificate Installation</h3>
+<p>To analyze HTTPS traffic from Android devices, you need to install Reqable's certificate:</p>
+
+<div class="step-guide">
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>Enable Proxy in Reqable</h4>
+            <p>In Reqable, go to Settings > Proxy and make sure the proxy is enabled. Note the IP address and port (default is 9090).</p>
+            <img src="images/android-step1.jpg" alt="Enable Proxy" class="step-image">
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>Export Certificate</h4>
+            <p>In Reqable, go to Settings > Certificate and export the certificate in PEM format. Send this file to your Android device.</p>
+            <img src="images/android-step2.jpg" alt="Export Certificate" class="step-image">
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>Install Certificate on Android</h4>
+            <p>On your Android device, go to Settings > Security > Encryption & credentials > Install a certificate > CA certificate. Select the PEM file you transferred.</p>
+            <img src="images/android-step3.jpg" alt="Install Certificate" class="step-image">
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+            <h4>Configure Android Proxy</h4>
+            <p>Go to Settings > Network & internet > Wi-Fi. Long press on your connected network, select Modify, then Advanced options. Set Proxy to Manual and enter the IP and port from Step 1.</p>
+            <img src="images/android-step4.jpg" alt="Configure Proxy" class="step-image">
+        </div>
+    </div>
+    
+    <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+            <h4>Verify Setup</h4>
+            <p>Open a browser on your Android device and visit any HTTPS website. You should see the traffic captured in Reqable.</p>
+            <img src="images/android-step5.jpg" alt="Verify Setup" class="step-image">
+        </div>
+    </div>
+</div>
+
+<h3>Using Reqable for Web Scraping Analysis</h3>
+
+<div class="sub-section">
+    <h4>Step 1: Start Capturing Traffic</h4>
+    <p>Click the "Start" button in Reqable to begin capturing HTTP traffic. All requests from your configured devices will now appear in the session list.</p>
+</div>
+
+<div class="sub-section">
+    <h4>Step 2: Analyze Requests</h4>
+    <p>Click on any request in the session list to view its details:</p>
+    <ul>
+        <li><strong>Headers:</strong> View request and response headers</li>
+        <li><strong>Body:</strong> Inspect request and response payloads</li>
+        <li><strong>Timing:</strong> Analyze request/response timing</li>
+        <li><strong>Raw:</strong> View raw HTTP data</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Step 3: Identify API Endpoints</h4>
+    <p>Look for patterns in the captured traffic to identify:</p>
+    <ul>
+        <li>API endpoints and their structure</li>
+        <li>Required headers and authentication</li>
+        <li>Request parameters and payload formats</li>
+        <li>Response data structure</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Step 4: Extract Data for Scraping</h4>
+    <p>Use the information gathered to build your web scraper:</p>
+    <div class="code-example">
+        <span class="code-comment">// Based on Reqable analysis, we found this API endpoint</span><br>
+        <span class="code-keyword">const</span> apiUrl = <span class="code-string">'https://api.example.com/data'</span>;<br>
+        <span class="code-keyword">const</span> headers = {<br>
+        &nbsp;&nbsp;<span class="code-string">'Authorization'</span>: <span class="code-string">'Bearer token_from_analysis'</span>,<br>
+        &nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span><br>
+        };<br><br>
+        
+        <span class="code-comment">// Make the API request</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">fetchData</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(apiUrl, { headers });<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> response.data;<br>
+        }
+    </div>
+</div>
+
+<h3>Advanced Features</h3>
+
+<div class="sub-section">
+    <h4>Request/Response Modification</h4>
+    <p>Reqable allows you to intercept and modify requests and responses in real-time:</p>
+    <ul>
+        <li>Change request headers before they're sent</li>
+        <li>Modify request body data</li>
+        <li>Alter response data before it reaches the client</li>
+        <li>Simulate different server responses</li>
+    </ul>
+</div>
+
+<div class="sub-section">
+    <h4>Breakpoints</h4>
+    <p>Set breakpoints to pause request/response processing and manually inspect or modify data:</p>
+    <div class="code-example">
+        <span class="code-comment">// In Reqable, you can set breakpoints for specific URLs</span><br>
+        <span class="code-comment">// This allows you to inspect and modify data in real-time</span><br>
+        <span class="code-comment">// Useful for debugging complex API interactions</span>
+    </div>
+</div>
+
+<div class="sub-section">
+    <h3>Best Practices</h3>
+    <ul>
+        <li>Use filters to focus on relevant traffic</li>
+        <li>Save important sessions for future reference</li>
+        <li>Use breakpoints for complex debugging scenarios</li>
+        <li>Clear session data regularly to improve performance</li>
+        <li>Export configuration for team collaboration</li>
+    </ul>
+</div>
