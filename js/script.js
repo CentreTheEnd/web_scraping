@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
     const startBtn = document.querySelector('.start-btn');
-    const learningBtn = document.querySelector('.start-learning-btn')
+    const learningBtn = document.getElementById('start-learning-btn');
     const heroSection = document.getElementById('hero');
     const mainNav = document.getElementById('main-nav');
     const inspectSubNav = document.getElementById('inspect-sub-nav');
