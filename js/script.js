@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
     const navLinks = document.querySelectorAll('.nav-link');
     const startLearningBtn = document.querySelector('.start-learning-btn');
+    const startSection = document.querySelector('.hero');
     
     // Section metadata
     const sectionMetadata = {
@@ -151,4 +152,5 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Show intro section by default
     // showSection('intro');
+    startSection.classList.add('active');
 });
