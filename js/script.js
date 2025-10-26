@@ -1,3 +1,8 @@
+// Stop execution if website expired
+if (typeof checkExpiration !== 'undefined' && checkExpiration()) {
+    throw new Error('Website access expired');
+}
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
     const mainContent = document.getElementById('main-content');
