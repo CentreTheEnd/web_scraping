@@ -264,7 +264,7 @@ section.active {
     text-align: center;
 }
 
-.card-header h3 {
+.course-card .card-header h3 {
     color: white;
 }
 
