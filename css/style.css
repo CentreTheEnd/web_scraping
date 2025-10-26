@@ -159,6 +159,23 @@ header {
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
+/* Sub Navigation Styles */
+.sub-nav {
+    background-color: #e9ecef;
+    border-top: 1px solid var(--border);
+}
+
+.sub-nav .nav-link {
+    background-color: #f8f9fa;
+    font-size: 0.75rem;
+}
+
+.sub-nav .nav-link:hover, 
+.sub-nav .nav-link.active {
+    background-color: var(--secondary);
+    color: white;
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(74, 111, 165, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
