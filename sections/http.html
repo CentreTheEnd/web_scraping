@@ -1,0 +1,327 @@
+<p>HTTP (Hypertext Transfer Protocol) is the foundation of data communication on the web. Understanding HTTP is crucial for effective web scraping and API interaction.</p>
+
+<div class="sub-section">
+    <h3>HTTP Overview</h3>
+    <p>HTTP is a request-response protocol between clients and servers. A web browser acts as a client, and an application running on a computer hosting the website acts as a server.</p>
+</div>
+
+<h2>HTTP Requests</h2>
+
+<div class="sub-section">
+    <h3>What is an HTTP Request?</h3>
+    <p>An HTTP request is a message sent by the client to initiate an action on the server. It consists of:</p>
+    <ul>
+        <li><strong>Request Line:</strong> Method, URL, and HTTP version</li>
+        <li><strong>Headers:</strong> Additional information about the request</li>
+        <li><strong>Body:</strong> Data sent to the server (for POST, PUT requests)</li>
+    </ul>
+</div>
+
+<h3>HTTP Request Methods</h3>
+<table class="http-table">
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+            <th>Use Case</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GET</td>
+            <td>Retrieve data from server</td>
+            <td>Loading web pages, fetching API data</td>
+        </tr>
+        <tr>
+            <td>POST</td>
+            <td>Send data to server</td>
+            <td>Form submissions, API data creation</td>
+        </tr>
+        <tr>
+            <td>PUT</td>
+            <td>Update existing resource</td>
+            <td>Updating user profiles, modifying data</td>
+        </tr>
+        <tr>
+            <td>DELETE</td>
+            <td>Remove resource</td>
+            <td>Deleting records, removing content</td>
+        </tr>
+        <tr>
+            <td>PATCH</td>
+            <td>Partial update</td>
+            <td>Updating specific fields</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>HTTP Request Structure</h3>
+<div class="http-diagram">
+    <div class="http-title">HTTP Request Example:</div>
+    <div class="http-line">GET /api/users HTTP/1.1</div>
+    <div class="http-line">Host: api.example.com</div>
+    <div class="http-line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64)</div>
+    <div class="http-line">Accept: application/json, text/plain, */*</div>
+    <div class="http-line">Accept-Language: en-US,en;q=0.9</div>
+    <div class="http-line">Authorization: Bearer abc123def456</div>
+    <div class="http-line">Content-Type: application/json</div>
+    <div class="http-line">Content-Length: 27</div>
+    <div class="http-line">&nbsp;</div>
+    <div class="http-line">{"name": "John", "age": 30}</div>
+</div>
+
+<h3>Common HTTP Request Headers</h3>
+<table class="http-table">
+    <thead>
+        <tr>
+            <th>Header</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>User-Agent</td>
+            <td>Identifies the client software</td>
+            <td>Mozilla/5.0 (Windows NT 10.0; Win64; x64)</td>
+        </tr>
+        <tr>
+            <td>Accept</td>
+            <td>Content types the client can understand</td>
+            <td>application/json, text/html</td>
+        </tr>
+        <tr>
+            <td>Content-Type</td>
+            <td>Type of data being sent</td>
+            <td>application/json, application/x-www-form-urlencoded</td>
+        </tr>
+        <tr>
+            <td>Authorization</td>
+            <td>Credentials for authentication</td>
+            <td>Bearer token123, Basic base64encoded</td>
+        </tr>
+        <tr>
+            <td>Cookie</td>
+            <td>Previously stored cookies</td>
+            <td>session=abc123; user=john_doe</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>HTTP Responses</h2>
+
+<div class="sub-section">
+    <h3>What is an HTTP Response?</h3>
+    <p>An HTTP response is the server's answer to a client's request. It contains:</p>
+    <ul>
+        <li><strong>Status Line:</strong> HTTP version, status code, and status text</li>
+        <li><strong>Headers:</strong> Additional information about the response</li>
+        <li><strong>Body:</strong> The requested resource or data</li>
+    </ul>
+</div>
+
+<h3>HTTP Response Structure</h3>
+<div class="http-diagram">
+    <div class="http-title">HTTP Response Example:</div>
+    <div class="http-line">HTTP/1.1 200 OK</div>
+    <div class="http-line">Content-Type: application/json; charset=utf-8</div>
+    <div class="http-line">Content-Length: 125</div>
+    <div class="http-line">Date: Mon, 23 Jan 2023 10:30:45 GMT</div>
+    <div class="http-line">Server: Apache/2.4.41 (Ubuntu)</div>
+    <div class="http-line">Set-Cookie: session=def456; Path=/; HttpOnly</div>
+    <div class="http-line">Cache-Control: no-cache</div>
+    <div class="http-line">&nbsp;</div>
+    <div class="http-line">{</div>
+    <div class="http-line">&nbsp;&nbsp;"status": "success",</div>
+    <div class="http-line">&nbsp;&nbsp;"data": {</div>
+    <div class="http-line">&nbsp;&nbsp;&nbsp;&nbsp;"user": "john_doe",</div>
+    <div class="http-line">&nbsp;&nbsp;&nbsp;&nbsp;"role": "admin"</div>
+    <div class="http-line">&nbsp;&nbsp;}</div>
+    <div class="http-line">}</div>
+</div>
+
+<h3>HTTP Status Codes</h3>
+<table class="http-table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Category</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1xx</td>
+            <td>Informational</td>
+            <td>Request received, continuing process</td>
+        </tr>
+        <tr>
+            <td>2xx</td>
+            <td>Success</td>
+            <td>Request successfully received and processed</td>
+        </tr>
+        <tr>
+            <td>3xx</td>
+            <td>Redirection</td>
+            <td>Further action needed to complete request</td>
+        </tr>
+        <tr>
+            <td>4xx</td>
+            <td>Client Error</td>
+            <td>Request contains bad syntax or cannot be fulfilled</td>
+        </tr>
+        <tr>
+            <td>5xx</td>
+            <td>Server Error</td>
+            <td>Server failed to fulfill a valid request</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>HTTP Tools</h2>
+
+<div class="sub-section">
+    <h3>Fetch API</h3>
+    <p>The Fetch API provides a modern interface for making HTTP requests in JavaScript. It's built into modern browsers and available in Node.js via libraries.</p>
+    
+    <h4>Basic Fetch Example</h4>
+    <div class="code-example">
+        <span class="code-comment">// GET request with Fetch</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">fetchData</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">'https://api.example.com/data'</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (!response.ok) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw new</span> <span class="code-function">Error</span>(<span class="code-string">'Network response was not ok'</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> data;<br>
+        &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">error</span>(<span class="code-string">'Error:'</span>, error);<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+    
+    <h4>POST Request with Headers</h4>
+    <div class="code-example">
+        <span class="code-comment">// POST request with custom headers</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">postData</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> <span class="code-function">fetch</span>(<span class="code-string">'https://api.example.com/users'</span>, {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;method: <span class="code-string">'POST'</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Authorization'</span>: <span class="code-string">'Bearer token123'</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;body: <span class="code-function">JSON</span>.<span class="code-function">stringify</span>({<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: <span class="code-string">'John Doe'</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: <span class="code-string">'john@example.com'</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+        &nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">await</span> response.<span class="code-function">json</span>();<br>
+        }
+    </div>
+</div>
+
+<div class="sub-section">
+    <h3>Axios Library</h3>
+    <p>Axios is a popular HTTP client that works in both browsers and Node.js. It provides a simpler API with automatic JSON parsing and better error handling.</p>
+    
+    <h4>Installation</h4>
+    <div class="code-example">
+        <span class="code-comment">// Install Axios</span><br>
+        <span class="code-keyword">npm</span> install axios
+    </div>
+    
+    <h4>Basic Axios Example</h4>
+    <div class="code-example">
+        <span class="code-comment">// GET request with Axios</span><br>
+        <span class="code-keyword">const</span> axios = <span class="code-function">require</span>(<span class="code-string">'axios'</span>);<br><br>
+        
+        <span class="code-keyword">async function</span> <span class="code-function">getData</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(<span class="code-string">'https://api.example.com/data'</span>);<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> response.data;<br>
+        &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">console</span>.<span class="code-function">error</span>(<span class="code-string">'Error:'</span>, error.<span class="code-function">response</span>?.data || error.<span class="code-function">message</span>);<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+    
+    <h4>Advanced Axios Configuration</h4>
+    <div class="code-example">
+        <span class="code-comment">// Axios with custom configuration</span><br>
+        <span class="code-keyword">async function</span> <span class="code-function">getWithConfig</span>() {<br>
+        &nbsp;&nbsp;<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> axios.<span class="code-function">get</span>(<span class="code-string">'https://api.example.com/data'</span>, {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'User-Agent'</span>: <span class="code-string">'MyScraper/1.0'</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Accept'</span>: <span class="code-string">'application/json'</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;timeout: 5000,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;params: {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;page: 1,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limit: 10<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;});<br>
+        &nbsp;&nbsp;<span class="code-keyword">return</span> response.data;<br>
+        }
+    </div>
+</div>
+
+<h3>Fetch vs Axios Comparison</h3>
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Fetch</th>
+            <th>Axios</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Browser Support</td>
+            <td>Modern browsers</td>
+            <td>All browsers</td>
+        </tr>
+        <tr>
+            <td>Node.js Support</td>
+            <td>With node-fetch</td>
+            <td>Native</td>
+        </tr>
+        <tr>
+            <td>JSON Handling</td>
+            <td>Manual parsing required</td>
+            <td>Automatic parsing</td>
+        </tr>
+        <tr>
+            <td>Request Timeout</td>
+            <td>Using AbortController</td>
+            <td>Built-in timeout option</td>
+        </tr>
+        <tr>
+            <td>Progress Tracking</td>
+            <td>Not available</td>
+            <td>Available for upload/download</td>
+        </tr>
+        <tr>
+            <td>Interceptors</td>
+            <td>Not available</td>
+            <td>Built-in support</td>
+        </tr>
+        <tr>
+            <td>Error Handling</td>
+            <td>Manual status code checking</td>
+            <td>Automatic error throwing for non-2xx</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="sub-section">
+    <h3>Best Practices for Web Scraping</h3>
+    <ul>
+        <li>Always set appropriate User-Agent headers</li>
+        <li>Implement proper error handling and retry logic</li>
+        <li>Respect rate limits and implement delays between requests</li>
+        <li>Handle different HTTP status codes appropriately</li>
+        <li>Use HTTPS for secure communication</li>
+        <li>Cache responses when possible to reduce server load</li>
+    </ul>
+</div>
