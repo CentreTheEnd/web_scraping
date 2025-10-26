@@ -264,6 +264,10 @@ section.active {
     text-align: center;
 }
 
+.card-header h3 {
+    color: white;
+}
+
 .card-body {
     padding: 1rem;
 }
