@@ -24,12 +24,23 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero active" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Web Scraping</h1>
+                <p>Learn how to extract data from websites efficiently using modern tools and techniques. This comprehensive course covers everything from basics to advanced implementations.</p>
+                <button class="btn start-btn">Start Learning Now</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Enhanced Navigation - Always Visible -->
-    <nav class="nav-container">
+    <nav class="nav-container" id="main-nav" style="display: none;">
         <div class="nav-wrapper">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a class="nav-link active" data-target="home">
+                    <a class="nav-link home-link" data-target="home">
                         <i class="fas fa-home"></i> Home
                     </a>
                 </li>
@@ -57,20 +68,37 @@
         </div>
     </nav>
 
+    <!-- Sub Navigation for Inspect Section -->
+    <nav class="nav-container sub-nav" id="inspect-sub-nav" style="display: none;">
+        <div class="nav-wrapper">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link inspect-home-link" data-target="inspect">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-target="reqable">
+                        <i class="fas fa-network-wired"></i> Reqable
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-target="proxypin">
+                        <i class="fas fa-shield-alt"></i> ProxyPin
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-target="chrome-console">
+                        <i class="fab fa-chrome"></i> Chrome Console
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <main class="container" id="main-content">
         <!-- Sections will be dynamically loaded here -->
-        <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Web Scraping</h1>
-                <p>Learn how to extract data from websites efficiently using modern tools and techniques. This comprehensive course covers everything from basics to advanced implementations.</p>
-                <button class="btn start-btn">Start Learning Now</button>
-            </div>
-        </div>
-    </section>
     </main>
 
     <!-- Footer -->
