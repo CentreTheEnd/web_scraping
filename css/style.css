@@ -693,3 +693,39 @@ footer {
         font-size: 0.7rem;
     }
 }
+
+/* Visitor Counter Styles */
+#visitor-counter .footer-links li {
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    padding: 5px 0;
+}
+
+#visitor-counter .footer-links li:hover {
+    border-left-color: #50c878;
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 10px;
+}
+
+#visitor-counter .footer-links strong {
+    color: #50c878;
+    float: right;
+}
+
+#visitor-counter .footer-links i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+/* Ensure footer content layout works with additional column */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Hide counter on expiration page */
+body:has(> div > div > .fa-clock) #visitor-counter {
+    display: none;
+}
