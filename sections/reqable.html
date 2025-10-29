@@ -52,47 +52,47 @@
     <div class="step">
         <div class="step-number">1</div>
         <div class="step-content">
-            <h4>Enable Proxy in Reqable</h4>
-            <p>In Reqable, go to Settings > Proxy and make sure the proxy is enabled. Note the IP address and port (default is 9090).</p>
-            <img src="images/reqable/android-step1.jpg" alt="Enable Proxy" class="step-image">
+            <h4>Access Certificate Management</h4>
+            <p>In the Reqable app, navigate to the Tabs section and enable "Certificate Management" under Remote Devices to access certificate controls.</p>
+            <img src="images/reqable/android-step1.jpg" alt="Certificate Management" class="step-image">
         </div>
     </div>
     
     <div class="step">
-        <div class="step-number">2</div>
+    <div class="step-number">2</div>
         <div class="step-content">
-            <h4>Export Certificate</h4>
-            <p>In Reqable, go to Settings > Certificate and export the certificate in PEM format. Send this file to your Android device.</p>
-            <img src="images/reqable/android-step2.jpg" alt="Export Certificate" class="step-image">
-        </div>
+             <h4>Install Root Certificate</h4>
+             <p>In Certificate Management, check the installation status. If not installed, proceed to install the root certificate to your local machine for traffic interception.</p>
+             <img src="images/reqable/android-step2.jpg" alt="Install Root Certificate" class="step-image">
+  </div>
+</div>
+
+<div class="step">
+    <div class="step-number">3</div>
+    <div class="step-content">
+        <h4>Export Certificate File</h4>
+        <p>Export the root certificate in your preferred format (.crt, .pem, or .0) from the Export Root Public Certificate options. The exported file contains only the X509 public certificate without storage password.</p>
+        <img src="images/reqable/android-step3.jpg" alt="Export Certificate" class="step-image">
     </div>
-    
-    <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-            <h4>Install Certificate on Android</h4>
-            <p>On your Android device, go to Settings > Security > Encryption & credentials > Install a certificate > CA certificate. Select the PEM file you transferred.</p>
-            <img src="images/reqable/android-step3.jpg" alt="Install Certificate" class="step-image">
-        </div>
+</div>
+
+<div class="step">
+    <div class="step-number">4</div>
+    <div class="step-content">
+        <h4>Install Certificate on Android System</h4>
+        <p>On your Android device, go to Settings > Security > More security settings > Credential storage > Install from phone storage and SD card. Select "CA certificate" and choose the certificate file you exported.</p>
+        <img src="images/reqable/android-step4.jpg" alt="Install CA Certificate" class="step-image">
     </div>
-    
-    <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-            <h4>Configure Android Proxy</h4>
-            <p>Go to Settings > Network & internet > Wi-Fi. Long press on your connected network, select Modify, then Advanced options. Set Proxy to Manual and enter the IP and port from Step 1.</p>
-            <img src="images/reqable/android-step4.jpg" alt="Configure Proxy" class="step-image">
-        </div>
+</div>
+
+<div class="step">
+    <div class="step-number">5</div>
+    <div class="step-content">
+        <h4>Verify Certificate Installation</h4>
+        <p>After installation, verify the certificate appears in Trusted Credentials under Credential Storage settings. You can also check Certificate Management in Reqable to confirm the root certificate is properly installed.</p>
+        <img src="images/reqable/android-step5.jpg" alt="Verify Installation" class="step-image">
     </div>
-    
-    <div class="step">
-        <div class="step-number">5</div>
-        <div class="step-content">
-            <h4>Verify Setup</h4>
-            <p>Open a browser on your Android device and visit any HTTPS website. You should see the traffic captured in Reqable.</p>
-            <img src="images/reqable/android-step5.jpg" alt="Verify Setup" class="step-image">
-        </div>
-    </div>
+</div>
 </div>
 
 <h3>Using Reqable for Web Scraping Analysis</h3>
